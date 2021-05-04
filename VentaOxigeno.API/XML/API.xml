@@ -262,6 +262,81 @@
             <param name="app"></param>
             <param name="env"></param>
         </member>
+        <member name="T:UPC.Business.API.Controllers.ProductController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UPC.Business.API.Controllers.ProductController._ProductRepository">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:UPC.Business.API.Controllers.ProductController.#ctor(DBContext.IProductRepository)">
+            <summary>
+            
+            </summary>
+            <param name="ProductRepository"></param>
+        </member>
+        <member name="M:UPC.Business.API.Controllers.ProductController.SearchByProviderId(System.Int32)">
+            <summary>
+            SearchById
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UPC.Business.API.Controllers.ProviderController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UPC.Business.API.Controllers.ProviderController._ProviderRepository">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:UPC.Business.API.Controllers.ProviderController.#ctor(DBContext.IProviderRepository)">
+            <summary>
+            
+            </summary>
+            <param name="ProviderRepository"></param>
+        </member>
+        <member name="M:UPC.Business.API.Controllers.ProviderController.SearchById(System.Int32)">
+            <summary>
+            SearchById
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UPC.Business.API.Controllers.UserController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:UPC.Business.API.Controllers.UserController._UserRepository">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:UPC.Business.API.Controllers.UserController.#ctor(DBContext.IUserRepository)">
+            <summary>
+            
+            </summary>
+            <param name="UserRepository"></param>
+        </member>
+        <member name="M:UPC.Business.API.Controllers.UserController.Login(DBEntity.EntityLogin)">
+            <summary>
+            GetListUser
+            </summary>
+            <param name="login"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UPC.Business.API.Controllers.UserController.Insert(DBEntity.EntityUser)">
+            <summary>
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
         <member name="T:VentaOxigeno.API.Controllers.ReserveController">
             <summary>
             
@@ -339,35 +414,6 @@
             <summary>
             
             </summary>
-            <returns></returns>
-        </member>
-        <member name="T:UPC.Business.API.Controllers.UserController">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:UPC.Business.API.Controllers.UserController._UserRepository">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:UPC.Business.API.Controllers.UserController.#ctor(DBContext.IUserRepository)">
-            <summary>
-            
-            </summary>
-            <param name="UserRepository"></param>
-        </member>
-        <member name="M:UPC.Business.API.Controllers.UserController.Login(DBEntity.EntityLogin)">
-            <summary>
-            GetListUser
-            </summary>
-            <param name="login"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UPC.Business.API.Controllers.UserController.Insert(DBEntity.EntityUser)">
-            <summary>
-            </summary>
-            <param name="user"></param>
             <returns></returns>
         </member>
     </members>

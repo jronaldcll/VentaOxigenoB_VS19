@@ -17,18 +17,18 @@ namespace DBContext
             {
                 using (var db = GetSqlConnection())
                 {
-                    const string sql = @"usp_InsertarUuario";
+                    const string sql = "create_user";
                     var p = new DynamicParameters();
-                    p.Add(name: "@IDUSUARIO", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                    p.Add(name: "@LOGINUSUARIO", value: user.LoginUsuario, dbType: DbType.String, direction: ParameterDirection.Input);
-                    p.Add(name: "@PASSWORDUSUARIO", value: user.PasswordUsuario, dbType: DbType.String, direction: ParameterDirection.Input);
-                    p.Add(name: "@ROLE", value: user.Role, dbType: DbType.String, direction: ParameterDirection.Input);
-                    p.Add(name: "@NOMBRE", value: user.Nombres, dbType: DbType.String, direction: ParameterDirection.Input);
-                    p.Add(name: "@USUARIOCREA", value: user.UsuarioCrea, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                    p.Add(name: "@userid", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                    p.Add(name: "@name", value: user.name, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@email", value: user.email, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@password", value: user.password, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@perfil", value: user.role, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@user_create", value: user.UsuarioCrea, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
                     db.Query<EntityLoginResponse>(sql, param: p, commandType: CommandType.StoredProcedure).FirstOrDefault();
-                    int IdUsuario = p.Get<int>("@IDUSUARIO");
+                    int IdUsuario = p.Get<int>("@userid");
 
                     returnEntity.isSuccess = true;
                     returnEntity.errorCode = "0000";

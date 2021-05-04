@@ -6,11 +6,11 @@ namespace DBEntity
 {
     public class EntityUser : EntityBase
     {
-        public int IdUser { get; set; } 
-        public string Nombres { get; set; }
-        public string LoginUsuario { get; set; }
-        public string PasswordUsuario { get; set; }
-        public string Role { get; set; }
+        public int id { get; set; } 
+        public string name { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+        public string role { get; set; }
 
     }
 }

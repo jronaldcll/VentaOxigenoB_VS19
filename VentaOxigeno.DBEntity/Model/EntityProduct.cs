@@ -12,6 +12,5 @@ namespace DBEntity
         public string price { get; set; }
         public int providerId { get; set; }
         public string ruc { get; set; }
-        public string state { get; set; }
     }
 }

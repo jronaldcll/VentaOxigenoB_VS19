@@ -109,5 +109,17 @@ namespace VentaOxigeno.API.Controllers
 
             return Json(ret);
         }
+
+        [Produces("application/json")]
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getReservesByProvider")]
+        public ActionResult GetReservesByProvider(int idProvider)
+        {
+            var ret = _ReserveRepository.GetReservesByProvider(idProvider);
+
+            return Json(ret);
+        }
+
     }
 }

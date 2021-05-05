@@ -6,10 +6,10 @@ namespace DBEntity
 {
     public class EntityReserve : EntityBase
     {
-        public int IdProyecto { get; set; }
-        public string Nombre { get; set; }
-        public decimal Precio { get; set; }
-        public string Direccion { get; set; }
-        public string Ubicacion { get; set; }
-    }
+		public int id { get; set; }
+		public string quantity { get; set; }
+		public string price { get; set; }
+		public string name_user { get; set; }
+		public string name_product { get; set; }
+	}
 }

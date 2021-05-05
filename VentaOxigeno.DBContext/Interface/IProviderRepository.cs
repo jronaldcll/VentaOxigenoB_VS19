@@ -9,5 +9,6 @@ namespace DBContext
     {
 
         BaseResponse SearchById(int id);
+        BaseResponse GetProvidersByDistrict(string distrito);
     }
 }

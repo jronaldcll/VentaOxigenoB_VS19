@@ -20,6 +20,6 @@ namespace DBEntity
         public string openOrClosed { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
-        public string state { get; set; }
+        public string distance { get; set; }
     }
 }

@@ -59,5 +59,49 @@ namespace DBContext
             return returnEntity;
         }
 
+        public BaseResponse GetProvidersByDistrict(string distrito)
+        {
+            var returnEntity = new BaseResponse();
+            var entityProject = new List<EntityProvider>();
+
+            try
+            {
+                using (var db = GetSqlConnection())
+                {
+                    const string sql = "search_provider_district";
+
+                    var p = new DynamicParameters();
+                    p.Add(name: "@district", value: distrito, dbType: DbType.String, direction: ParameterDirection.Input);
+
+                    entityProject = db.Query<EntityProvider>(sql, param: p, commandType: CommandType.StoredProcedure).ToList();
+
+
+                    if (entityProject != null)
+                    {
+                        returnEntity.isSuccess = true;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = entityProject;
+                    }
+                    else
+                    {
+                        returnEntity.isSuccess = false;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                returnEntity.isSuccess = false;
+                returnEntity.errorCode = "0000";
+                returnEntity.errorMessage = ex.Message;
+                returnEntity.data = null;
+            }
+
+            return returnEntity;
+        }
+
     }
 }

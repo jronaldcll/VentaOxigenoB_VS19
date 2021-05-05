@@ -144,7 +144,7 @@ namespace DBContext
             {
                 using (var db = GetSqlConnection())
                 {
-                    const string sql = @"usp_InsertarProyecto";
+                   /* const string sql = @"usp_InsertarProyecto";
 
                     var p = new DynamicParameters();
                     p.Add(name: "@IDPROYECTO", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -153,7 +153,7 @@ namespace DBContext
                     p.Add(name: "@DIRECCION", value: reserve.Direccion, dbType: DbType.String, direction: ParameterDirection.Input);
                     p.Add(name: "@UBICACION", value: reserve.Ubicacion, dbType: DbType.String, direction: ParameterDirection.Input);
                     p.Add(name: "@USUARIOCREA", value: reserve.UsuarioCrea, dbType: DbType.Int32, direction: ParameterDirection.Input);
-
+                    
                     db.Query<EntityReserve>(sql, param: p, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
                     int idReserve = p.Get<int>("@IDPROYECTO");
@@ -177,6 +177,7 @@ namespace DBContext
                         returnEntity.errorMessage = string.Empty;
                         returnEntity.data = null;
                     }
+                   */
                 }
             }
             catch (Exception ex)
@@ -189,5 +190,50 @@ namespace DBContext
 
             return returnEntity;
         }
+
+        public BaseResponse GetReservesByProvider(int idProvider)
+        {
+            var returnEntity = new BaseResponse();
+            var entityReserve = new List<EntityReserve>();
+
+            try
+            {
+                using (var db = GetSqlConnection())
+                {
+                    const string sql = "list_reserved_provider";
+
+                    var p = new DynamicParameters();
+                    p.Add(name: "@providerid", value: idProvider, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+                    entityReserve = db.Query<EntityReserve>(sql, param: p, commandType: CommandType.StoredProcedure).ToList();
+
+
+                    if (entityReserve != null)
+                    {
+                        returnEntity.isSuccess = true;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = entityReserve;
+                    }
+                    else
+                    {
+                        returnEntity.isSuccess = false;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                returnEntity.isSuccess = false;
+                returnEntity.errorCode = "0000";
+                returnEntity.errorMessage = ex.Message;
+                returnEntity.data = null;
+            }
+
+            return returnEntity;
+        }
+
     }
 }

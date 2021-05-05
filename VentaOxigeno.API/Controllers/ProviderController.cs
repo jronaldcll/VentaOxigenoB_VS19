@@ -71,5 +71,16 @@ namespace UPC.Business.API.Controllers
 
             return Json(ret);
         }
+
+        [Produces("application/json")]
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GetProvidersByDistrict")]
+        public ActionResult GetProvidersByDistrict(string distrito)
+        {
+            var ret = _ProviderRepository.GetProvidersByDistrict(distrito);
+
+            return Json(ret);
+        }
     }
 }

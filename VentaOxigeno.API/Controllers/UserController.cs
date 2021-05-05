@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NSwag.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -83,13 +84,22 @@ namespace UPC.Business.API.Controllers
         [Route("registeruser")]
         public ActionResult Insert(EntityUser user)
         {
-            //var identity = User.Identity as ClaimsIdentity;
-            //IEnumerable<Claim> claims = identity.Claims;
+            var userId ="";
+            var identity = User.Identity as ClaimsIdentity;
+            if (identity == null || !identity.IsAuthenticated)
+            {
+                userId = "0";
+            }
+            else
+            {
+                IEnumerable<Claim> claims = identity.Claims;
 
-            //var usuarioId = claims.Where(p => p.Type == "client_codigo_usuario").FirstOrDefault().Value;
-            //var usuarioDoc = claims.Where(p => p.Type == "client_numero_documento").FirstOrDefault().Value;
+                var usuarioId = claims.Where(p => p.Type == "client_codigo_usuario").FirstOrDefault().Value;
+                var userNom = claims.Where(p => p.Type == "client_numero_documento").FirstOrDefault().Value;
+                userId = usuarioId;
+            }
 
-            user.UsuarioCrea = 1;//int.Parse(usuarioId);
+            user.UsuarioCrea = int.Parse(userId);
             var ret = _UserRepository.Insert(user);
 
             if (ret == null)
@@ -98,19 +108,5 @@ namespace UPC.Business.API.Controllers
             return Json(ret);
         }
 
-        /*    [Produces("application/json")]
-        [SwaggerOperation("GetListUser")]
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("GetListUser")]
-        public ActionResult Get()
-        {
-            var ret = _UserRepository.GetUsers();
-
-            if (ret == null)
-                return StatusCode(401);
-
-            return Json(ret);
-        }*/
     }
 }

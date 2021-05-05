@@ -26,7 +26,6 @@ namespace DBContext
                     p.Add(name: "@perfil", value: user.Role, dbType: DbType.String, direction: ParameterDirection.Input);
                     p.Add(name: "@user_create", value: user.UsuarioCrea, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-
                     db.Query<EntityLoginResponse>(sql, param: p, commandType: CommandType.StoredProcedure).FirstOrDefault();
                     int IdUsuario = p.Get<int>("@userid");
 

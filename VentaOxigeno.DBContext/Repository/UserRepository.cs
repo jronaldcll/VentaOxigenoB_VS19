@@ -20,10 +20,10 @@ namespace DBContext
                     const string sql = "create_user";
                     var p = new DynamicParameters();
                     p.Add(name: "@userid", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                    p.Add(name: "@name", value: user.name, dbType: DbType.String, direction: ParameterDirection.Input);
-                    p.Add(name: "@email", value: user.email, dbType: DbType.String, direction: ParameterDirection.Input);
-                    p.Add(name: "@password", value: user.password, dbType: DbType.String, direction: ParameterDirection.Input);
-                    p.Add(name: "@perfil", value: user.role, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@name", value: user.Name, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@email", value: user.Email, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@password", value: user.Password, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@perfil", value: user.Role, dbType: DbType.String, direction: ParameterDirection.Input);
                     p.Add(name: "@user_create", value: user.UsuarioCrea, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
@@ -55,7 +55,7 @@ namespace DBContext
             {
                 using (var db = GetSqlConnection())
                 {
-                    const string sql = @"usp_user_login";
+                    const string sql = @"user_login";
                     var p = new DynamicParameters();
                     p.Add(name: "@LOGINUSUARIO", value: login.LoginUsuario, dbType: DbType.String, direction: ParameterDirection.Input);
                     p.Add(name: "@PASSWORDUSUARIO", value: login.PasswordUsuario, dbType: DbType.String, direction: ParameterDirection.Input);

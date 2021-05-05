@@ -55,13 +55,13 @@ namespace UPC.Business.API.Controllers
             if (ret.data != null)
             {
                 var responseLogin = ret.data as EntityLoginResponse;
-                var userId = responseLogin.IdUsuario.ToString();
-                var userDoc = responseLogin.DocumentoIdentidad;
+                var userId = responseLogin.IdUser.ToString();
+                var userNom = responseLogin.Nombres;
 
                 var token = JsonConvert
                     .DeserializeObject<AccessToken>(
                         await new Authentication()
-                        .GenerateToken(userDoc, userId)
+                        .GenerateToken(userNom, userId)
                         ).access_token;
 
                 responseLogin.Token = token;

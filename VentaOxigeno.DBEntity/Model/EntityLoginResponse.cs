@@ -6,11 +6,9 @@ namespace DBEntity
 {
     public class EntityLoginResponse
     {
-        public int IdUsuario { get; set; } // MEJORA: Reemplazar por Key, ID - Alias BD
-        public int IdPerfil { get; set; }
-        public string ApellidoPaterno { get; set; }
-        public string ApellidoMaterno { get; set; }
-        public string DocumentoIdentidad { get; set; }
+        public int IdUser { get; set; } 
+        public string Role { get; set; }
+        public string Nombres { get; set; }
         public string Token { get; set; }
     }
 }

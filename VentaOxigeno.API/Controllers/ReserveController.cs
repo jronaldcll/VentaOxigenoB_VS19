@@ -19,6 +19,7 @@ namespace VentaOxigeno.API.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Project")]
+    [ApiController] //Para que lo muestre como Json
 
     public class ReserveController : Controller
 
@@ -121,5 +122,27 @@ namespace VentaOxigeno.API.Controllers
             return Json(ret);
         }
 
+
+        [Produces("application/json")]
+        [Authorize]
+        [HttpGet]
+        [Route("getReservesByUser")]
+        public ActionResult GetReservesByUser(int id)
+        {
+            var ret = _ReserveRepository.GetReservesByUser(id);
+
+            return Json(ret);
+        }
+
+        [Produces("application/json")]
+        [Authorize]
+        [HttpPost]
+        [Route("createReserve")]
+        public ActionResult CreateReserve(EntityReserveProduct reserve)
+        {
+            var ret = _ReserveRepository.CreateReserve(reserve);
+
+            return Json(ret);
+        }
     }
 }

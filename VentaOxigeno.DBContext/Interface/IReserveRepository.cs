@@ -15,5 +15,8 @@ namespace DBContext
 
         BaseResponse Insert(EntityReserve reserve);
         BaseResponse GetReservesByProvider(int idProvider);
+        BaseResponse GetReservesByUser(int id);
+
+        BaseResponse CreateReserve(EntityReserveProduct reserve);
     }
 }

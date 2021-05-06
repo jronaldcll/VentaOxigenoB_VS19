@@ -235,5 +235,85 @@ namespace DBContext
             return returnEntity;
         }
 
+
+        public BaseResponse GetReservesByUser(int id)
+        {
+            var returnEntity = new BaseResponse();
+            var entityReserve = new List<EntityReserveProduct>();
+
+            try
+            {
+                using (var db = GetSqlConnection())
+                {
+                    const string sql = "search_reserved_by_user";
+
+                    var p = new DynamicParameters();
+                    p.Add(name: "@userid", value: id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+                    entityReserve = db.Query<EntityReserveProduct>(sql, param: p, commandType: CommandType.StoredProcedure).ToList();
+
+
+                    if (entityReserve != null)
+                    {
+                        returnEntity.isSuccess = true;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = entityReserve;
+                    }
+                    else
+                    {
+                        returnEntity.isSuccess = false;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                returnEntity.isSuccess = false;
+                returnEntity.errorCode = "0000";
+                returnEntity.errorMessage = ex.Message;
+                returnEntity.data = null;
+            }
+
+            return returnEntity;
+        }
+
+
+        public BaseResponse CreateReserve(EntityReserveProduct reserve)
+        {
+            var returnEntity = new BaseResponse();
+            try
+            {
+                using (var db = GetSqlConnection())
+                {
+                    const string sql = "create_reserve";
+                    var p = new DynamicParameters();
+                    p.Add(name: "@reserveid", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                    p.Add(name: "@quantity ", value: reserve.quantity, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@price", value: reserve.price, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@userId", value: reserve.userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                    p.Add(name: "@productId", value: reserve.productId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+                    db.Query<EntityReserveProduct>(sql, param: p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    int reserveid = p.Get<int>("@reserveid");
+
+                    returnEntity.isSuccess = true;
+                    returnEntity.errorCode = "0000";
+                    returnEntity.errorMessage = string.Empty;
+                    returnEntity.data = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                returnEntity.isSuccess = false;
+                returnEntity.errorCode = "0001";
+                returnEntity.errorMessage = ex.Message;
+                returnEntity.data = null;
+            }
+            return returnEntity;
+        }
     }
 }

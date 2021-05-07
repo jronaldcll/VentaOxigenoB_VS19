@@ -112,7 +112,7 @@ namespace VentaOxigeno.API.Controllers
         }
 
         [Produces("application/json")]
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet]
         [Route("getReservesByProvider")]
         public ActionResult GetReservesByProvider(int idProvider)
@@ -144,5 +144,17 @@ namespace VentaOxigeno.API.Controllers
 
             return Json(ret);
         }
+
+        [Produces("application/json")]
+        [Authorize]
+        [HttpPost]
+        [Route("update_State_Reserve")]
+        public ActionResult Update_State_Reserve(EntityReserve reserve)
+        {
+            var ret = _ReserveRepository.Update_State_Reserve(reserve);
+
+            return Json(ret);
+        }
+
     }
 }

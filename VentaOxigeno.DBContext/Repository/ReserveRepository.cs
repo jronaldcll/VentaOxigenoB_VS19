@@ -315,5 +315,36 @@ namespace DBContext
             }
             return returnEntity;
         }
+
+        public BaseResponse Update_State_Reserve(EntityReserve reserve)
+        {
+            var returnEntity = new BaseResponse();
+            try
+            {
+                using (var db = GetSqlConnection())
+                {
+                    const string sql = "udp_state_reserve";
+                    var p = new DynamicParameters();
+                    p.Add(name: "@id", value: reserve.id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                    p.Add(name: "@stateReserve ", value: reserve.stateReserve, dbType: DbType.String, direction: ParameterDirection.Input);
+
+                    db.Query<EntityReserveProduct>(sql, param: p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                    returnEntity.isSuccess = true;
+                    returnEntity.errorCode = "0000";
+                    returnEntity.errorMessage = string.Empty;
+                    returnEntity.data = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                returnEntity.isSuccess = false;
+                returnEntity.errorCode = "0001";
+                returnEntity.errorMessage = ex.Message;
+                returnEntity.data = null;
+            }
+            return returnEntity;
+        }
     }
 }

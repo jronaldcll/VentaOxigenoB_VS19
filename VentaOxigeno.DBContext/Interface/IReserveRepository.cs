@@ -18,5 +18,7 @@ namespace DBContext
         BaseResponse GetReservesByUser(int id);
 
         BaseResponse CreateReserve(EntityReserveProduct reserve);
+
+        BaseResponse Update_State_Reserve(EntityReserve reserve);        
     }
 }

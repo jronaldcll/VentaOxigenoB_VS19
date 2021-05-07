@@ -11,5 +11,6 @@ namespace DBEntity
 		public string price { get; set; }
 		public string name_user { get; set; }
 		public string name_product { get; set; }
+		public string stateReserve { get; set; }
 	}
 }

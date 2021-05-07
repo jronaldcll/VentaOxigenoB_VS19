@@ -14,7 +14,7 @@ namespace DBContext
         BaseResponse GetReservePrice(decimal price_min, decimal price_max, string direccion);
 
         BaseResponse Insert(EntityReserve reserve);
-        BaseResponse GetReservesByProvider(int idProvider);
+        BaseResponse GetReservesByProvider(string ProviderEmail);
         BaseResponse GetReservesByUser(int id);
 
         BaseResponse CreateReserve(EntityReserveProduct reserve);

@@ -115,9 +115,9 @@ namespace VentaOxigeno.API.Controllers
         [Authorize]
         [HttpGet]
         [Route("getReservesByProvider")]
-        public ActionResult GetReservesByProvider(int idProvider)
+        public ActionResult GetReservesByProvider(string ProviderEmail)
         {
-            var ret = _ReserveRepository.GetReservesByProvider(idProvider);
+            var ret = _ReserveRepository.GetReservesByProvider(ProviderEmail);
 
             return Json(ret);
         }

@@ -9,6 +9,7 @@ namespace DBEntity
         public int IdUser { get; set; } 
         public string Role { get; set; }
         public string Nombres { get; set; }
+        public string LoginUsuario { get; set; }
         public string Token { get; set; }
     }
 }

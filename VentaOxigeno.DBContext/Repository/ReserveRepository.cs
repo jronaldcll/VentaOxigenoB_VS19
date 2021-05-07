@@ -191,7 +191,7 @@ namespace DBContext
             return returnEntity;
         }
 
-        public BaseResponse GetReservesByProvider(int idProvider)
+        public BaseResponse GetReservesByProvider(string ProviderEmail)
         {
             var returnEntity = new BaseResponse();
             var entityReserve = new List<EntityReserve>();
@@ -203,7 +203,7 @@ namespace DBContext
                     const string sql = "list_reserved_provider";
 
                     var p = new DynamicParameters();
-                    p.Add(name: "@providerid", value: idProvider, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                    p.Add(name: "@email", value: ProviderEmail, dbType: DbType.String, direction: ParameterDirection.Input);
 
                     entityReserve = db.Query<EntityReserve>(sql, param: p, commandType: CommandType.StoredProcedure).ToList();
 

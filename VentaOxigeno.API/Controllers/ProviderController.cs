@@ -82,5 +82,35 @@ namespace UPC.Business.API.Controllers
 
             return Json(ret);
         }
+
+        [Produces("application/json")]
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getSearchAllProvider")]
+        public ActionResult GetSearchAllProvider()
+        {
+            var result = _ProviderRepository.SearchAllProvider();
+            return Json(result);
+        }
+
+        [Produces("application/json")]
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("getInsertNewProvider")]
+        public ActionResult InsertNewProvider(EntityProvider provider)
+        {
+            var result = _ProviderRepository.InsertNewProvider(provider);
+            return Json(result);
+        }
+
+        [Produces("application/json")]
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("postUpdateProvider")]
+        public ActionResult UpdateProvider(EntityProvider provider)
+        {
+            var result = _ProviderRepository.UpdateProvider(provider);
+            return Json(result);
+        }
     }
 }

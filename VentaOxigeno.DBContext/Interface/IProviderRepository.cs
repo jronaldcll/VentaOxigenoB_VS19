@@ -10,5 +10,8 @@ namespace DBContext
 
         BaseResponse SearchById(int id);
         BaseResponse GetProvidersByDistrict(string distrito);
+        BaseResponse SearchAllProvider();
+        BaseResponse InsertNewProvider(EntityProvider provider);
+        BaseResponse UpdateProvider(EntityProvider provider);
     }
 }

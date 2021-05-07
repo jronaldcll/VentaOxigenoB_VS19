@@ -103,5 +103,146 @@ namespace DBContext
             return returnEntity;
         }
 
+        public BaseResponse SearchAllProvider()
+        {
+            var returnEntity = new BaseResponse();
+            var entityProject = new List<EntityProvider>();
+
+            try
+            {
+                using (var db = GetSqlConnection())
+                {
+                    const string sql = "search_provider_REGISTER";
+                    entityProject = db.Query<EntityProvider>(sql, commandType: CommandType.StoredProcedure).ToList();
+
+
+                    if (entityProject != null)
+                    {
+                        returnEntity.isSuccess = true;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = entityProject;
+                    }
+                    else
+                    {
+                        returnEntity.isSuccess = false;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return returnEntity;
+        }
+
+        public BaseResponse InsertNewProvider(EntityProvider provider)
+        {
+            var returnEntity = new BaseResponse();
+            var entityUser = new EntityLoginResponse();
+
+            try
+            {
+                using (var db = GetSqlConnection())
+                {
+                    const string sql = "insert_new_provider";
+                    var p = new DynamicParameters();
+                    p.Add(name: "@Ruc", value: provider.ruc, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@NomEmp", value: provider.name, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@Distrito", value: provider.district, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@Direccion", value: provider.address, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@Email", value: provider.email, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@NomRepresent", value: provider.firtsname_representative, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@ApeRepresent", value: provider.lastname_representative, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@idprovider", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+
+                    db.Query<EntityProvider>(sql, param: p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                    int idprovider = p.Get<int>("@idprovider");
+
+                    if (idprovider > 0)
+                    {
+                        returnEntity.isSuccess = true;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = idprovider;
+                    }
+                    else
+                    {
+                        returnEntity.isSuccess = false;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = idprovider;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                returnEntity.isSuccess = false;
+                returnEntity.errorCode = "0001";
+                returnEntity.errorMessage = ex.Message;
+                returnEntity.data = null;
+            }
+
+            return returnEntity;
+        }
+
+        public BaseResponse UpdateProvider(EntityProvider provider)
+        {
+            var returnEntity = new BaseResponse();
+            var entityUser = new EntityLoginResponse();
+            var resu = new EntityProvider();
+            try
+            {
+                using (var db = GetSqlConnection())
+                {
+                    const string sql = "update_provider";
+                    var p = new DynamicParameters();
+                    p.Add(name: "@Ruc", value: provider.ruc, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@NomEmp", value: provider.name, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@Distrito", value: provider.district, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@Direccion", value: provider.address, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@NomRepresent", value: provider.firtsname_representative, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@ApeRepresent", value: provider.lastname_representative, dbType: DbType.String, direction: ParameterDirection.Input);
+                    p.Add(name: "@idprovider", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+
+                    resu = db.Query<EntityProvider>(sql, param: p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                    int idprovider = p.Get<int>("@idprovider");
+
+
+                    if (idprovider > 0)
+                    {
+                        returnEntity.isSuccess = true;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = idprovider;
+                    }
+                    else
+                    {
+                        returnEntity.isSuccess = false;
+                        returnEntity.errorCode = "0000";
+                        returnEntity.errorMessage = string.Empty;
+                        returnEntity.data = idprovider;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                returnEntity.isSuccess = false;
+                returnEntity.errorCode = "0001";
+                returnEntity.errorMessage = ex.Message;
+                returnEntity.data = null;
+            }
+
+            return returnEntity;
+        }
+
     }
 }

@@ -103,7 +103,7 @@ namespace DBContext
             return returnEntity;
         }
 
-        public BaseResponse SearchAllProvider()
+        public BaseResponse SearchAllProvider() 
         {
             var returnEntity = new BaseResponse();
             var entityProject = new List<EntityProvider>();

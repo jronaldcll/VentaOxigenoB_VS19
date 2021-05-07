@@ -106,7 +106,7 @@ namespace UPC.Business.API.Controllers
         [Produces("application/json")]
         [AllowAnonymous]
         [HttpPost]
-        [Route("postUpdateProvider")]
+        [Route("postUpdateProvider")] 
         public ActionResult UpdateProvider(EntityProvider provider)
         {
             var result = _ProviderRepository.UpdateProvider(provider);

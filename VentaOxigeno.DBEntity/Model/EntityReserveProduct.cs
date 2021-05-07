@@ -7,6 +7,7 @@ namespace DBEntity
 	public class EntityReserveProduct : EntityBase
 	{
 		public string name { get; set; }
+		public string provider { get; set; }
 		public int id { get; set; }
 		public string quantity { get; set; }
 		public string price { get; set; }
